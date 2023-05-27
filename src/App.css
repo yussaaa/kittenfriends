@@ -32,7 +32,21 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
+}
+
+@font-face {
+  font-family: 'Milky Lemon Regular';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Milky Lemon Regular'), url('Milky Lemon.woff') format('woff');
+}
+
+h1 {
+  font-family: 'Milky Lemon Regular';
+  font-weight: 200;
+  color: #0ccac4
 }
