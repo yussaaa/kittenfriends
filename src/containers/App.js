@@ -7,6 +7,7 @@ import SearchBox from '../components/searchBox'
 
 import './App.css'
 import Scroll from '../components/Scroll'
+import ErrorBoundary from '../components/ErrorBoundary';
 
 
 // const state = {
@@ -31,7 +32,7 @@ class App extends Component {
       kittens: [],
       searchfield: ''
     }
-    console.log('Constructor')
+    // console.log('Constructor')
   }
 
   onSearchChange = (event) => {
@@ -42,7 +43,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    console.log("componentDidMount")
+    // console.log("componentDidMount")
     fetch('https://jsonplaceholder.typicode.com/users')
       .then(response => response.json())
       .then(users => { this.setState({ kittens: users }) })
@@ -60,7 +61,7 @@ class App extends Component {
       );
     });
 
-    console.log('Render')
+    // console.log('Render')
 
     return !kittens.length ?
       <h1 className='f1'>Loading ...</h1> :
@@ -70,7 +71,10 @@ class App extends Component {
           <h1 className='f1'>Kitten Friends</h1>
           <SearchBox searchChange={this.onSearchChange} />
           <Scroll>
-            <CardList kittens={filteredKittens} />
+            <ErrorBoundary>
+              <CardList kittens={filteredKittens} />
+            </ErrorBoundary>
+
           </Scroll>
 
 

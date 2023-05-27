@@ -11,8 +11,13 @@ const CardList = ({ kittens }) => {
     //         email={kittens[i].email} />
     // })
 
+    // if (true) {
+    //     setTimeout('', 10000);
+    //     throw new Error('NOOOOOO!')
+    // }
 
     return (
+
         <Fragment>
             {(kittens.map((user, i) => {
                 return <Card
