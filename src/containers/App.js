@@ -1,12 +1,12 @@
 import logo from './logo.svg';
 import './App.css';
 import React, { Component } from 'react';
-import CardList from './CardList';
+import CardList from '../components/CardList';
 // import { kittens } from './robots';
-import SearchBox from './searchBox'
+import SearchBox from '../components/searchBox'
 
 import './App.css'
-import Scroll from './Scroll'
+import Scroll from '../components/Scroll'
 
 
 // const state = {
@@ -36,7 +36,7 @@ class App extends Component {
 
   onSearchChange = (event) => {
     this.setState({ searchfield: event.target.value })
-    // this.state.searchfield = event.target.value
+    // searchfield = event.target.value
 
     console.log({ event });
   }
@@ -52,19 +52,20 @@ class App extends Component {
 
   render() {
 
-    const filteredKittens = this.state.kittens.filter(kitten => {
+    const { kittens, searchfield } = this.state
+
+    const filteredKittens = kittens.filter(kitten => {
       return kitten.name.toLowerCase().includes(
-        this.state.searchfield.toLocaleLowerCase()
+        searchfield.toLocaleLowerCase()
       );
     });
 
     console.log('Render')
 
-    if (this.state.kittens.length === 0) {
-      return <h1 className='f1'>Loading ...</h1>
-    }
-    else {
-      return (
+    return !kittens.length ?
+      <h1 className='f1'>Loading ...</h1> :
+
+      (
         <div className='tc'>
           <h1 className='f1'>Kitten Friends</h1>
           <SearchBox searchChange={this.onSearchChange} />
@@ -75,9 +76,9 @@ class App extends Component {
 
         </div>
       )
-    }
-
   }
+
 }
+
 
 export default App;
