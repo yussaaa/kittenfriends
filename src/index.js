@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./containers/App";
@@ -10,7 +10,6 @@ import "tachyons";
 // import CardList from './CardList';
 // import { kittens } from './robots';
 import { Provider } from "react-redux"; //Provider here as a wrapper to pass the store to every object underneath
-import { createStore } from "redux";
 import { configureStore } from "@reduxjs/toolkit";
 import { searchKitten } from "./reducers";
 
