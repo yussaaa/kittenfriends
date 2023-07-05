@@ -11,9 +11,11 @@ import "tachyons";
 // import { kittens } from './robots';
 import { Provider } from "react-redux"; //Provider here as a wrapper to pass the store to every object underneath
 import { createStore } from "redux";
+import { configureStore } from "@reduxjs/toolkit";
 import { searchKitten } from "./reducers";
 
-const store = createStore(searchKitten); // In real cases, there will be multiple reducers
+// const store = createStore(searchKitten); // In real cases, there will be multiple reducers
+const store = configureStore({ reducer: searchKitten });
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
