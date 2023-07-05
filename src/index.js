@@ -19,10 +19,7 @@ import { applyMiddleware } from "@reduxjs/toolkit";
 const logger = createLogger();
 
 // const store = createStore(searchKitten); // In real cases, there will be multiple reducers
-const store = configureStore(
-  { reducer: searchKitten },
-  applyMiddleware(logger)
-);
+const store = configureStore({ reducer: searchKitten, middleware: [logger] });
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
