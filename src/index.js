@@ -13,8 +13,16 @@ import { Provider } from "react-redux"; //Provider here as a wrapper to pass the
 import { configureStore } from "@reduxjs/toolkit";
 import { searchKitten } from "./reducers";
 
+import { createLogger } from "redux-logger";
+import { applyMiddleware } from "@reduxjs/toolkit";
+
+const logger = createLogger();
+
 // const store = createStore(searchKitten); // In real cases, there will be multiple reducers
-const store = configureStore({ reducer: searchKitten });
+const store = configureStore(
+  { reducer: searchKitten },
+  applyMiddleware(logger)
+);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
