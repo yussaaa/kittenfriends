@@ -12,21 +12,6 @@ import ErrorBoundary from "../components/ErrorBoundary";
 import { setSearchField, requestKitten } from "../actions";
 import { connect } from "react-redux";
 
-// const state = {
-//   kittens: kittens,
-//   searchfield: ''
-// }
-
-// const App = () => {
-//   return (
-//     <div className='tc'>
-//       <h1 >Kitten Friends</h1>
-//       <SearchBox />
-//       <CardList kittens={kittens} />
-//     </div>
-//   )
-// }
-
 const mapStateToProps = (state) => {
   return {
     searchField: state.searchKitten.searchField,
@@ -44,35 +29,11 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 class App extends Component {
-  // constructor() {
-  //   super();
-  //   this.state = {
-  //     kittens: [],
-  //     // searchfield: "",
-  //   };
-  //   // console.log('Constructor')
-  // }
-
-  // onSearchChange = (event) => {
-  //   this.setState({ searchfield: event.target.value });
-  //   // searchfield = event.target.value
-
-  //   console.log({ event });
-  // };
-
   componentDidMount() {
-    // console.log("componentDidMount")
-    // console.log(this.props.store);
-    // fetch("https://jsonplaceholder.typicode.com/users")
-    //   .then((response) => response.json())
-    //   .then((users) => {
-    //     this.setState({ kittens: users });
-    //   });
     this.props.onRequestKittens();
   }
 
   render() {
-    // const { kittens } = this.state;
     const { searchField, onSearchChange, kittens, isPending } = this.props;
 
     const filteredKittens = kittens.filter((kitten) => {
@@ -80,8 +41,6 @@ class App extends Component {
         .toLowerCase()
         .includes(searchField.toLocaleLowerCase());
     });
-
-    // console.log('Render')
 
     return isPending ? (
       <h1 className="f1">Loading ...</h1>
