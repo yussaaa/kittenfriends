@@ -9,7 +9,7 @@ import "./App.css";
 import Scroll from "../components/Scroll";
 import ErrorBoundary from "../components/ErrorBoundary";
 
-import { setSearchField } from "../actions";
+import { setSearchField, requestKitten } from "../actions";
 import { connect } from "react-redux";
 
 // const state = {
@@ -29,25 +29,29 @@ import { connect } from "react-redux";
 
 const mapStateToProps = (state) => {
   return {
-    searchField: state.searchField,
+    searchField: state.searchKitten.searchField,
+    kittens: state.requestKitten.kittens,
+    isPending: state.requestKitten.isPending,
+    error: state.requestKitten.error,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     onSearchChange: (event) => dispatch(setSearchField(event.target.value)),
+    onRequestKittens: () => dispatch(requestKitten()),
   };
 };
 
 class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      kittens: [],
-      // searchfield: "",
-    };
-    // console.log('Constructor')
-  }
+  // constructor() {
+  //   super();
+  //   this.state = {
+  //     kittens: [],
+  //     // searchfield: "",
+  //   };
+  //   // console.log('Constructor')
+  // }
 
   // onSearchChange = (event) => {
   //   this.setState({ searchfield: event.target.value });
@@ -59,16 +63,17 @@ class App extends Component {
   componentDidMount() {
     // console.log("componentDidMount")
     // console.log(this.props.store);
-    fetch("https://jsonplaceholder.typicode.com/users")
-      .then((response) => response.json())
-      .then((users) => {
-        this.setState({ kittens: users });
-      });
+    // fetch("https://jsonplaceholder.typicode.com/users")
+    //   .then((response) => response.json())
+    //   .then((users) => {
+    //     this.setState({ kittens: users });
+    //   });
+    this.props.onRequestKittens();
   }
 
   render() {
-    const { kittens } = this.state;
-    const { searchField, onSearchChange } = this.props;
+    // const { kittens } = this.state;
+    const { searchField, onSearchChange, kittens, isPending } = this.props;
 
     const filteredKittens = kittens.filter((kitten) => {
       return kitten.name
@@ -78,7 +83,7 @@ class App extends Component {
 
     // console.log('Render')
 
-    return !kittens.length ? (
+    return isPending ? (
       <h1 className="f1">Loading ...</h1>
     ) : (
       <div className="tc">
