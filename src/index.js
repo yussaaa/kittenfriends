@@ -10,16 +10,23 @@ import "tachyons";
 // import CardList from './CardList';
 // import { kittens } from './robots';
 import { Provider } from "react-redux"; //Provider here as a wrapper to pass the store to every object underneath
-import { configureStore } from "@reduxjs/toolkit";
-import { searchKitten } from "./reducers";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { searchKitten, requestKitten } from "./reducers";
 
 import { createLogger } from "redux-logger";
 import { applyMiddleware } from "@reduxjs/toolkit";
 
+import thunk from "redux-thunk";
+
 const logger = createLogger();
 
+const rootReducer = combineReducers({ searchKitten, requestKitten });
+
 // const store = createStore(searchKitten); // In real cases, there will be multiple reducers
-const store = configureStore({ reducer: searchKitten, middleware: [logger] });
+const store = configureStore({
+  reducer: rootReducer,
+  middleware: [logger, thunk],
+});
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
